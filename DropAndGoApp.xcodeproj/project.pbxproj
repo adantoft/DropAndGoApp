@@ -15,6 +15,7 @@
 		8450038E1C7A4DDA0016115F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8450038C1C7A4DDA0016115F /* LaunchScreen.storyboard */; };
 		845003991C7A4DDA0016115F /* DropAndGoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845003981C7A4DDA0016115F /* DropAndGoAppTests.swift */; };
 		845003A41C7A4DDA0016115F /* DropAndGoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845003A31C7A4DDA0016115F /* DropAndGoAppUITests.swift */; };
+		962F50B91C7D34E00068C5C9 /* PlayGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962F50B81C7D34E00068C5C9 /* PlayGameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		8450039F1C7A4DDA0016115F /* DropAndGoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropAndGoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		845003A31C7A4DDA0016115F /* DropAndGoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropAndGoAppUITests.swift; sourceTree = "<group>"; };
 		845003A51C7A4DDA0016115F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		962F50B81C7D34E00068C5C9 /* PlayGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayGameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				845003831C7A4DDA0016115F /* art.scnassets */,
 				845003851C7A4DDA0016115F /* GameViewController.swift */,
 				845003871C7A4DDA0016115F /* Main.storyboard */,
+				962F50B81C7D34E00068C5C9 /* PlayGameViewController.swift */,
 				8450038A1C7A4DDA0016115F /* Assets.xcassets */,
 				8450038C1C7A4DDA0016115F /* LaunchScreen.storyboard */,
 				8450038F1C7A4DDA0016115F /* Info.plist */,
@@ -265,6 +268,7 @@
 			files = (
 				845003861C7A4DDA0016115F /* GameViewController.swift in Sources */,
 				845003821C7A4DDA0016115F /* AppDelegate.swift in Sources */,
+				962F50B91C7D34E00068C5C9 /* PlayGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +495,7 @@
 				845003AA1C7A4DDA0016115F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		845003AB1C7A4DDA0016115F /* Build configuration list for PBXNativeTarget "DropAndGoAppTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +504,7 @@
 				845003AD1C7A4DDA0016115F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		845003AE1C7A4DDA0016115F /* Build configuration list for PBXNativeTarget "DropAndGoAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +513,7 @@
 				845003B01C7A4DDA0016115F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
