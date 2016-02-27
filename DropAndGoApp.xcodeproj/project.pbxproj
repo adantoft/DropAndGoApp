@@ -112,11 +112,11 @@
 			isa = PBXGroup;
 			children = (
 				845003B11C820AD90016115F /* model */,
-				845003811C7A4DDA0016115F /* AppDelegate.swift */,
 				845003B91C820E430016115F /* resources */,
 				845003B81C820E220016115F /* view */,
-				845003871C7A4DDA0016115F /* Main.storyboard */,
+				845003811C7A4DDA0016115F /* AppDelegate.swift */,
 				8450038C1C7A4DDA0016115F /* LaunchScreen.storyboard */,
+				845003871C7A4DDA0016115F /* Main.storyboard */,
 				845003BC1C820EDD0016115F /* MainController.swift */,
 			);
 			path = DropAndGoApp;
@@ -147,7 +147,7 @@
 				845003B41C820B230016115F /* Board.swift */,
 				845003B61C820B360016115F /* Node.swift */,
 			);
-			name = model;
+			path = model;
 			sourceTree = "<group>";
 		};
 		845003B81C820E220016115F /* view */ = {
@@ -157,17 +157,17 @@
 				962F50B81C7D34E00068C5C9 /* PlayGameViewController.swift */,
 				845003BA1C820E700016115F /* TextUI.swift */,
 			);
-			name = view;
+			path = view;
 			sourceTree = "<group>";
 		};
 		845003B91C820E430016115F /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				845003831C7A4DDA0016115F /* art.scnassets */,
 				8450038A1C7A4DDA0016115F /* Assets.xcassets */,
 				8450038F1C7A4DDA0016115F /* Info.plist */,
+				845003831C7A4DDA0016115F /* art.scnassets */,
 			);
-			name = resources;
+			path = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +354,7 @@
 				845003881C7A4DDA0016115F /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		8450038C1C7A4DDA0016115F /* LaunchScreen.storyboard */ = {
@@ -362,6 +363,7 @@
 				8450038D1C7A4DDA0016115F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -452,7 +454,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = DropAndGoApp/Info.plist;
+				INFOPLIST_FILE = DropAndGoApp/resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DnD.DropAndGoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -463,7 +465,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = DropAndGoApp/Info.plist;
+				INFOPLIST_FILE = DropAndGoApp/resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DnD.DropAndGoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
