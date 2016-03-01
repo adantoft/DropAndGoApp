@@ -21,6 +21,7 @@
 		845003BB1C820E700016115F /* TextUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845003BA1C820E700016115F /* TextUI.swift */; };
 		845003BD1C820EDD0016115F /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845003BC1C820EDD0016115F /* MainController.swift */; };
 		962F50B91C7D34E00068C5C9 /* PlayGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962F50B81C7D34E00068C5C9 /* PlayGameViewController.swift */; };
+		966DCF621C8497E2002EFD75 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966DCF611C8497E2002EFD75 /* TutorialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		845003BA1C820E700016115F /* TextUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUI.swift; sourceTree = "<group>"; };
 		845003BC1C820EDD0016115F /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		962F50B81C7D34E00068C5C9 /* PlayGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayGameViewController.swift; sourceTree = "<group>"; };
+		966DCF611C8497E2002EFD75 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				845003811C7A4DDA0016115F /* AppDelegate.swift */,
 				8450038C1C7A4DDA0016115F /* LaunchScreen.storyboard */,
 				845003871C7A4DDA0016115F /* Main.storyboard */,
+				966DCF611C8497E2002EFD75 /* TutorialViewController.swift */,
 				845003BC1C820EDD0016115F /* MainController.swift */,
 			);
 			path = DropAndGoApp;
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				845003BD1C820EDD0016115F /* MainController.swift in Sources */,
+				966DCF621C8497E2002EFD75 /* TutorialViewController.swift in Sources */,
 				845003861C7A4DDA0016115F /* GameViewController.swift in Sources */,
 				845003B31C820B0C0016115F /* AI.swift in Sources */,
 				845003B51C820B230016115F /* Board.swift in Sources */,

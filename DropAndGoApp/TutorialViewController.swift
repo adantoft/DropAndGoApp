@@ -1,32 +1,29 @@
 //
-//  PlayGameViewController.swift
+//  TutorialViewController.swift
 //  DropAndGoApp
 //
-//  Created by Kayle Drucker on 2/23/16.
+//  Created by Kayle Drucker on 2/29/16.
 //  Copyright © 2016 D and D Software. All rights reserved.
 //
 
 import UIKit
 
-class PlayGameViewController: UIViewController {
+class TutorialViewController: UIViewController {
 
-    var board = [[Int]]()
-    let BOARD_SIZE_X = 9
-    let BOARD_SIZE_Y = 9
-    let SCORING_X = 2
-    let SCORING_Y = 2
-    let SCORING_Z = 1 //number of points awarded for diagonal
-    
-    
-    
-    @IBAction func switchToMainMenu(sender: UIBarButtonItem) {
+    @IBAction func goToMainMenu(sender: UIBarButtonItem) {
+        var top: UIViewController = self;
+        while top.presentingViewController != nil {
+            top = top.presentingViewController!;
+        }
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-   
+    
+    @IBAction func backToGame(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
         // Do any additional setup after loading the view.
     }
@@ -35,8 +32,6 @@ class PlayGameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-   
     
 
     /*

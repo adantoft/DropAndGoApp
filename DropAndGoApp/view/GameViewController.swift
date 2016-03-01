@@ -13,10 +13,21 @@ import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
+    
+    var toolbar:UIToolbar = UIToolbar()
+    //@IBOutlet weak var toolbar:UIToolbar!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setting up a toolbar on the main screen
+        let checkButton = [UIBarButtonItem(title: "Start Game", style: .Done, target: self, action: "switchToGame:")]
+        toolbar.frame = CGRectMake(200, self.view.frame.size.height - 46, self.view.frame.size.width, 48)
+        toolbar.sizeToFit()
+        toolbar.setItems(checkButton, animated: true)
+        toolbar.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(toolbar)
         // create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
@@ -66,6 +77,15 @@ class GameViewController: UIViewController {
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
         scnView.addGestureRecognizer(tapGesture)
+    }
+    
+    
+    @IBAction func switchToGame(sender: UIBarButtonItem) {
+        let playGameViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlayGameViewController")as! PlayGameViewController
+        
+        
+        
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func handleTap(gestureRecognize: UIGestureRecognizer) {
