@@ -10,18 +10,33 @@ import UIKit
 
 class TutorialViewController: UIViewController {
 
-    @IBAction func goToMainMenu(sender: UIBarButtonItem) {
-        var top: UIViewController = self;
-        while top.presentingViewController != nil {
-            top = top.presentingViewController!;
+    @IBOutlet weak var gameButton: UIBarButtonItem!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var fromDisplay: UILabel!
+    
+    var from = ""
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        if from == "MenuViewController" {
+            menuButton.enabled = true
+        } else if from == "PlayGameViewController" {
+            gameButton.enabled = true
         }
+        
+    }
+    
+    @IBAction func goToMainMenu(sender: UIBarButtonItem) {
+
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     @IBAction func backToGame(sender: AnyObject) {
+       
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
