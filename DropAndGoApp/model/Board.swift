@@ -8,7 +8,6 @@
 
 import Foundation
 
-<<<<<<< Updated upstream
 class Board {
     
     var board: [[Int]]
@@ -204,16 +203,6 @@ class Board {
     }
     
 }
-=======
-
-
-//TODO: Break below code into sections
-//TODO: covert from Java to Swift
->>>>>>> Stashed changes
-
-
-
-
 
 /*
 JAVA CODE:
