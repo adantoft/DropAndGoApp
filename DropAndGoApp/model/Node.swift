@@ -33,11 +33,11 @@ class Node {
      * @param action     the action made to get to this board
      * @param depth      number of layers from the root node
      */
-    init(parentNode: Node, board: Board, action: Int, depth: Int) {
-        self.parentNode = parentNode;
-        self.board = board;
-        self.action = action;
-        self.depth = depth;
+    init(parentNode: Node?, board: Board, action: Int, depth: Int) {
+        self.parentNode = parentNode! //TODO: Remove from init and have set later
+        self.board = board
+        self.action = action
+        self.depth = depth
         self.childNodes = []
     }
     
