@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Afq-Ut-P9A">
-                                <rect key="frame" x="213" y="251" width="329" height="30"/>
+                                <rect key="frame" x="213" y="251" width="357" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
@@ -68,7 +68,7 @@
                             <constraint firstItem="Afq-Ut-P9A" firstAttribute="leading" secondItem="8CV-Sg-rhU" secondAttribute="trailing" constant="8" symbolic="YES" id="2rB-yZ-TtA"/>
                             <constraint firstItem="e1w-HR-u1e" firstAttribute="centerX" secondItem="cpr-mu-0uY" secondAttribute="centerX" id="6BY-6x-LEW"/>
                             <constraint firstItem="I5u-ZV-arb" firstAttribute="leading" secondItem="Afq-Ut-P9A" secondAttribute="leading" id="9j9-hs-FAP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Afq-Ut-P9A" secondAttribute="trailing" constant="38" id="CRF-fk-cE3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Afq-Ut-P9A" secondAttribute="trailing" constant="10" id="CRF-fk-cE3"/>
                             <constraint firstItem="I5u-ZV-arb" firstAttribute="centerX" secondItem="cpr-mu-0uY" secondAttribute="centerX" id="FB1-Bw-X7v"/>
                             <constraint firstItem="8CV-Sg-rhU" firstAttribute="centerY" secondItem="Afq-Ut-P9A" secondAttribute="centerY" id="I1v-GQ-iCB"/>
                             <constraint firstAttribute="trailing" secondItem="YmV-Rz-G8R" secondAttribute="trailing" id="QHM-7m-nPp"/>
@@ -116,14 +116,17 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 1: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAU-30-bYV">
-                                <rect key="frame" x="183" y="28" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAU-30-bYV">
+                                <rect key="frame" x="215" y="28" width="170" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="XoW-Kv-qTU"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 2: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4a-1W-3xx">
-                                <rect key="frame" x="335" y="28" width="81" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4a-1W-3xx">
+                                <rect key="frame" x="215" y="57" width="170" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -131,11 +134,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="eAU-30-bYV" firstAttribute="leading" secondItem="L4a-1W-3xx" secondAttribute="leading" id="A2u-nA-39k"/>
+                            <constraint firstItem="eAU-30-bYV" firstAttribute="top" secondItem="p3N-2t-esz" secondAttribute="bottom" constant="8" symbolic="YES" id="WWf-8Y-QrS"/>
                             <constraint firstAttribute="trailing" secondItem="XAx-T7-ExG" secondAttribute="trailing" id="XBe-St-d4c"/>
+                            <constraint firstItem="L4a-1W-3xx" firstAttribute="trailing" secondItem="eAU-30-bYV" secondAttribute="trailing" id="Yjs-2Y-M4G"/>
                             <constraint firstItem="XAx-T7-ExG" firstAttribute="leading" secondItem="jz1-k1-7AP" secondAttribute="leading" id="dde-Sw-InM"/>
                             <constraint firstItem="XAx-T7-ExG" firstAttribute="bottom" secondItem="eZj-1A-EDX" secondAttribute="top" id="j4v-GO-L87"/>
+                            <constraint firstItem="L4a-1W-3xx" firstAttribute="top" secondItem="eAU-30-bYV" secondAttribute="bottom" constant="8" symbolic="YES" id="sp1-2f-wYh"/>
+                            <constraint firstItem="L4a-1W-3xx" firstAttribute="centerX" secondItem="XAx-T7-ExG" secondAttribute="centerX" id="wA4-A6-vbt"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="player1Display" destination="eAU-30-bYV" id="bEK-4Y-7vy"/>
+                        <outlet property="player2Display" destination="L4a-1W-3xx" id="qn6-Cl-815"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7xP-nX-mk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

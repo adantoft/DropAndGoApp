@@ -32,20 +32,25 @@ class MenuViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
         if let target = segue.destinationViewController as? TutorialViewController{
             target.from = "MenuViewController"
         }
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-       
-        /*
-        if let target = segue.destinationViewController as? PlayGameViewController {
-            //target.message = "From BlueViewController"
-            if let text = textField.text  {
-                target.message += "\nMessage: \(text)"
+        
+        if let target = segue.destinationViewController as? PlayGameViewController{
+            if let player1 = playerNameField.text {
+                target.player1 = "\(player1)"
+                if (options[picker.selectedRowInComponent(1)] == "Against Computer") {
+                    target.player2 = "Computer"
+                } else {
+                    target.player2 = "Online Player"
+                }
+                
+                
             }
         }
-*/
     }
     
     

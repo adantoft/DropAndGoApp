@@ -10,30 +10,16 @@ import UIKit
 
 class PlayGameViewController: UIViewController {
 
-    var board = [[Int]]()
-    let BOARD_SIZE_X = 9
-    let BOARD_SIZE_Y = 9
-    let SCORING_X = 2
-    let SCORING_Y = 2
-    let SCORING_Z = 1 //number of points awarded for diagonal
+    @IBOutlet weak var player1Display: UILabel!
     
-    func makeMove(player: Int, and moveColumn: Int) -> Bool {
-        if(player < 1 || player > 2 || moveColumn < 1 || moveColumn > BOARD_SIZE_X){
-            //errorMessage = ""
-            
-        }
-        return true
-    }
+    @IBOutlet weak var player2Display: UILabel!
+    var board: Board?
+    var node: Node?
+    var ai: AI?
+    var player1 = ""
+    var player2 = ""
+    var objects: [UIButton] = []
     
-    struct CGRect {
-        var origin: CGPoint
-        var size: CGSize
-        init(origin: CGPoint, size: CGSize){
-            self.origin = origin
-            self.size = size
-        }
-       
-    }
     
 
     @IBAction func switchToMainMenu(sender: UIBarButtonItem) {
@@ -44,6 +30,8 @@ class PlayGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        drawBoard()
+        
 
         // Do any additional setup after loading the view.
     }
@@ -52,6 +40,13 @@ class PlayGameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        player1Display.text = player1 + ": 0"
+        player2Display.text = player2 + ": 0"
+       
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
@@ -65,6 +60,32 @@ class PlayGameViewController: UIViewController {
             }
 */
         }
+    }
+    
+    func drawBoard() {
+        let numCols = 9
+        let numRows = 9
+        var xOffSet: CGFloat = 26
+        var yOffSet: CGFloat = 96
+        var row = 0
+        var col = 0
+        
+        while(col < numRows) {
+        repeat {
+            let button = UIButton()
+                button.backgroundColor = UIColor.blueColor()
+                button.frame = CGRect(x: xOffSet, y: yOffSet, width: 24, height: 24)
+                view.addSubview(button)
+                objects.append(button)
+                xOffSet += 26
+                row++
+        } while row < numRows
+        yOffSet += 26
+        xOffSet = 26
+        row = 0
+        col++
+        }
+        
     }
     
    
