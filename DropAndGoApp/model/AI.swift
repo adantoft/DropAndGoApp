@@ -38,22 +38,20 @@ class AI {
     
     
     func getMove() -> Int { //asks the AI for the next move
-//            TODO: uncomment below lines once pruning is implemented
-//        var alphaVal: Int = Int.min //sets alpha beta
-//        var betaVal: Int = Int.max
+        //            TODO: uncomment below lines once pruning is implemented
+        //        var alphaVal: Int = Int.min //sets alpha beta
+        //        var betaVal: Int = Int.max
         
         let rootNode: Node = Node(board: board, action: 0, depth: 0); //makes root node that has the current game board as a starting point
         var goodMoveNodes: Array<Node> = [] //list of nodes that are good moves
         if (pruning) {
-            //TODO: Implement pruning tree
+            //TODO: Implement pruning tree; uncomment the below when ready
             //makePruningMoveTree(rootNode, playerNumber, alphaVal, betaVal, evaluateMax);  //run minmax with pruning
         }else {
-//            TODO: uncomment below lines once functions are implemented
-//            makeMoveTree(rootNode, player: playerNumber); //create minmax tree
-//            evalMoveTree(rootNode, evaluateMax: evaluateMax); //bubble up the tree evaluating moves
+            //            TODO: uncomment below lines once functions are implemented
+            makeMoveTree(rootNode, player: playerNumber); //create minmax tree
+            evalMoveTree(rootNode, evaluateMax: evaluateMax); //bubble up the tree evaluating moves
         }
-        
-        
         for n in rootNode.getChildNodes()! {
             do {
                 if (try n.getEvalValue() == rootNode.getEvalValue()) { //grabs nodes that are good moves
@@ -87,7 +85,82 @@ class AI {
     }
     
     
+    func makeMoveTree(node: Node, player: Int) { //recursive depth first function; creates node tree
+        if (node.getDepth() < plyLevel - 1) {
+            for n in node.getSuccessorStates(player) {
+                if (player == playerNumber) { //alternates players Min Max
+                    makeMoveTree(n, player: opponentPlayerNumber);
+                } else {
+                    makeMoveTree(n, player: playerNumber);
+                }
+            }
+        } else {
+            if (node.getSuccessorStates(player).count != 0) {
+                for n in node.getChildNodes()! {
+                    n.setEvalValue(evaluate(n)); //set node evaluation values at base of tree
+                }
+            }
+        }
+    }
     
+    func evalMoveTree(node: Node, evaluateMax: Bool) { //recursive depth first function; finds base node
+        if (node.getDepth() < plyLevel - 1) {
+            if (node.hasChildren()) {
+                for n in node.getChildNodes()! {
+                    evalMoveTree(n, evaluateMax: evaluateMax);
+                }
+            }
+            node.setEvalValue(getMinMaxBubbleUp(node, evaluateMax: evaluateMax)); //evaluate moves
+        } else {
+            node.setEvalValue(getMinMaxBubbleUp(node, evaluateMax: evaluateMax)); //evaluate moves
+        }
+    }
+    
+    func getMinMaxBubbleUp(node: Node, evaluateMax: Bool) -> Int { //function to set node evaluation value based on its children's evaluations
+        if (node.getChildNodes() == nil) {
+            return evaluate(node);
+        } else {
+            do {
+                var evalValue = try node.getChildNodes()![0].getEvalValue()
+                
+                for n in node.getChildNodes()! {
+                    
+                    if (evaluateMax) {
+                        evalValue = max(try n.getEvalValue(), evalValue); //evaluate for Max
+                        
+                    } else {
+                        evalValue = min(try n.getEvalValue(), evalValue); //evaluate for min
+                    }
+                }
+                return evalValue;
+                
+                
+            } catch Node.Errors.NotSetYet {
+                print("Eval not set!!")
+            } catch {
+                print("Unknown ERRROR!")
+            }
+            return 0 //TODO: this isn't foolproof... this line of code shouldn't be reached
+
+        }
+        
+    }
+    
+    
+    func evaluate(node: Node) -> Int { //evaluation function. gets player score minus opponent player score
+        
+        var eval = node.getBoard().getPlayerScore(playerNumber) - node.getBoard().getPlayerScore(opponentPlayerNumber);
+        
+        if (!node.getBoard().hasAvailableMoves()) { //if there are no moves left (game over)
+            if (eval > 0) {
+                eval = Int.max //max winning value
+            } else {
+                eval = Int.min //min winning value
+            }
+        }
+        
+        return eval;
+    }
     
     
     
@@ -103,70 +176,7 @@ class AI {
 JAVA CODE:
 
 
-func makeMoveTree(node: Node, player: Int) { //recursive depth first function; creates node tree
-if (node.getDepth() < plyLevel - 1) {
-for (Node n : node.getSuccessorStates(player)) {
-if (player == playerNumber) { //alternates players Min Max
-makeMoveTree(n, opponentPlayerNumber);
-} else {
-makeMoveTree(n, playerNumber);
-}
-}
-} else {
-if (node.getSuccessorStates(player).size() != 0) {
-for (Node n : node.getChildNodes()) {
-n.setEvalValue(evaluate(n)); //set node evaluation values at base of tree
-}
-}
-}
-}
 
-func evalMoveTree(node: Node, evaluateMax: Bool) { //recursive depth first function; finds base node
-if (node.getDepth() < plyLevel - 1) {
-if (node.hasChildren()) {
-for (Node n : node.getChildNodes()) {
-evalMoveTree(n, !evaluateMax);
-}
-}
-node.setEvalValue(getMinMaxBubbleUp(node, evaluateMax)); //evaluate moves
-} else {
-node.setEvalValue(getMinMaxBubbleUp(node, evaluateMax)); //evaluate moves
-}
-}
-
-private Integer getMinMaxBubbleUp(Node node, boolean evaluateMax) { //function to set node evaluation value based on its children's evaluations
-if (node.getChildNodes() == null) {
-return evaluate(node);
-} else {
-Integer evalValue = node.getChildNodes().get(0).getEvalValue();
-for (Node n : node.getChildNodes()) {
-assert n.getEvalValue() != null;
-if (evaluateMax) {
-evalValue = Math.max(n.getEvalValue(), evalValue); //evaluate for Max
-} else {
-evalValue = Math.min(n.getEvalValue(), evalValue); //evaluate for min
-}
-}
-return evalValue;
-}
-
-}
-
-
-private int evaluate(Node node) { //evaluation function. gets player score minus opponent player score
-
-Integer eval = node.getBoard().getPlayerScore(playerNumber) - node.getBoard().getPlayerScore(opponentPlayerNumber);
-
-if (!node.getBoard().hasAvailableMoves()) { //if there are no moves left (game over)
-if (eval > 0) {
-eval = Integer.MAX_VALUE; //max winning value
-} else {
-eval = Integer.MIN_VALUE; //min winning value
-}
-}
-
-return eval;
-}
 
 
 
