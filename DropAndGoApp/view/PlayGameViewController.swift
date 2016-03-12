@@ -19,6 +19,7 @@ class PlayGameViewController: UIViewController {
     var player1 = ""
     var player2 = ""
     var objects: [UIButton] = []
+    var createBoard = Board.init()
     
     
 
@@ -63,14 +64,14 @@ class PlayGameViewController: UIViewController {
     }
     
     func drawBoard() {
-        let numCols = 9
-        let numRows = 9
+        var numCols = 9
+        var numRows = 9
         var xOffSet: CGFloat = 26
         var yOffSet: CGFloat = 96
         var row = 0
         var col = 0
         
-        while(col < numRows) {
+        while(col < numCols) {
         repeat {
             let button = UIButton()
                 button.backgroundColor = UIColor.blueColor()

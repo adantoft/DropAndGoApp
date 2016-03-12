@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Afq-Ut-P9A">
-                                <rect key="frame" x="213" y="251" width="357" height="30"/>
+                                <rect key="frame" x="213" y="251" width="347" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
@@ -64,20 +64,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YmV-Rz-G8R" firstAttribute="centerX" secondItem="e1w-HR-u1e" secondAttribute="centerX" id="0iQ-L3-OLz"/>
                             <constraint firstItem="Afq-Ut-P9A" firstAttribute="leading" secondItem="8CV-Sg-rhU" secondAttribute="trailing" constant="8" symbolic="YES" id="2rB-yZ-TtA"/>
                             <constraint firstItem="e1w-HR-u1e" firstAttribute="centerX" secondItem="cpr-mu-0uY" secondAttribute="centerX" id="6BY-6x-LEW"/>
                             <constraint firstItem="I5u-ZV-arb" firstAttribute="leading" secondItem="Afq-Ut-P9A" secondAttribute="leading" id="9j9-hs-FAP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Afq-Ut-P9A" secondAttribute="trailing" constant="10" id="CRF-fk-cE3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Afq-Ut-P9A" secondAttribute="trailing" constant="20" id="CRF-fk-cE3"/>
                             <constraint firstItem="I5u-ZV-arb" firstAttribute="centerX" secondItem="cpr-mu-0uY" secondAttribute="centerX" id="FB1-Bw-X7v"/>
+                            <constraint firstItem="YmV-Rz-G8R" firstAttribute="leading" secondItem="6R3-Ny-Adi" secondAttribute="leading" id="GHh-dH-Njf"/>
                             <constraint firstItem="8CV-Sg-rhU" firstAttribute="centerY" secondItem="Afq-Ut-P9A" secondAttribute="centerY" id="I1v-GQ-iCB"/>
-                            <constraint firstAttribute="trailing" secondItem="YmV-Rz-G8R" secondAttribute="trailing" id="QHM-7m-nPp"/>
                             <constraint firstItem="I5u-ZV-arb" firstAttribute="top" secondItem="E5z-7b-JaU" secondAttribute="bottom" constant="25" id="Tax-RO-YuV"/>
                             <constraint firstItem="cpr-mu-0uY" firstAttribute="top" secondItem="I5u-ZV-arb" secondAttribute="bottom" constant="62" id="XTK-4Y-ff6"/>
-                            <constraint firstItem="YmV-Rz-G8R" firstAttribute="leading" secondItem="6R3-Ny-Adi" secondAttribute="leading" id="iQZ-iw-PSl"/>
+                            <constraint firstItem="YmV-Rz-G8R" firstAttribute="top" secondItem="Afq-Ut-P9A" secondAttribute="bottom" constant="16" id="bo5-Yj-gpA"/>
+                            <constraint firstItem="YmV-Rz-G8R" firstAttribute="centerX" secondItem="e1w-HR-u1e" secondAttribute="centerX" id="o26-9Z-QPc"/>
                             <constraint firstItem="e1w-HR-u1e" firstAttribute="top" secondItem="cpr-mu-0uY" secondAttribute="bottom" constant="8" symbolic="YES" id="ruf-LW-tkH"/>
                             <constraint firstItem="Afq-Ut-P9A" firstAttribute="top" secondItem="e1w-HR-u1e" secondAttribute="bottom" constant="36" id="uTI-vl-9Fg"/>
-                            <constraint firstItem="YmV-Rz-G8R" firstAttribute="top" secondItem="Afq-Ut-P9A" secondAttribute="bottom" constant="16" id="zb0-wq-dbx"/>
+                            <constraint firstAttribute="trailing" secondItem="YmV-Rz-G8R" secondAttribute="trailing" id="wPT-qh-cjh"/>
                         </constraints>
                     </view>
                     <connections>

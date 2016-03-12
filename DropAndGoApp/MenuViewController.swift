@@ -9,7 +9,7 @@
 import UIKit
 
 let playerType = ["Player 2"]
-let options = ["Against Computer", "Online Player"]
+let options = ["Computer", "Online Player"]
 
 class MenuViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -17,6 +17,7 @@ class MenuViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var playerNameField: UITextField!
+    var message = ""
     
     @IBAction func playGameButton(sender: UIButton) {
         
@@ -42,10 +43,26 @@ class MenuViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         if let target = segue.destinationViewController as? PlayGameViewController{
             if let player1 = playerNameField.text {
                 target.player1 = "\(player1)"
-                if (options[picker.selectedRowInComponent(1)] == "Against Computer") {
+                if (options[picker.selectedRowInComponent(1)] == "Computer") {
                     target.player2 = "Computer"
                 } else {
                     target.player2 = "Online Player"
+                    message = "Feature to be coming in the Future\n Select Again."
+                    let title = "Feature Not Available"
+                    
+                    // Create the action.
+                    let okAction = UIAlertAction(title: "Okay",
+                        style: .Default,
+                        handler: nil)
+                    
+                    let alertController =
+                    UIAlertController(title: title,
+                        message: message,
+                        preferredStyle: .Alert)
+                        alertController.addAction(okAction)
+                    presentViewController(alertController,
+                        animated: true,
+                        completion: nil)
                 }
                 
                 
@@ -87,6 +104,30 @@ class MenuViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         }
     }
     
+    func compAlert(message:String){
+        let title = "Start you Game"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
+        
+        // Create the action.
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive) { action in
+            let cancelController = UIAlertController(title: "No Problem", message: "Select again.", preferredStyle: .Alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+            cancelController.addAction(okayAction)
+            self.presentViewController(cancelController, animated: true, completion: nil)
+        }
+        let confirmAction = UIAlertAction(title: "Confirm", style: .Default) { action in
+            //let dateString = dateFormat.stringFromDate(date)
+            let okayController = UIAlertController(title: "Welcome!", message: "Your Game Will begin shortly.", preferredStyle: .Alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+            okayController.addAction(okayAction)
+            self.presentViewController(okayController, animated: false, completion: nil)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+ 
 
     /*
     // MARK: - Navigation
