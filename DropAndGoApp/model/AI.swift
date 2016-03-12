@@ -42,7 +42,7 @@ class AI {
 //        var alphaVal: Int = Int.min //sets alpha beta
 //        var betaVal: Int = Int.max
         
-        let rootNode: Node = Node(parentNode: nil, board: board, action: 0, depth: 0); //makes root node that has the current game board as a starting point
+        let rootNode: Node = Node(board: board, action: 0, depth: 0); //makes root node that has the current game board as a starting point
         var goodMoveNodes: Array<Node> = [] //list of nodes that are good moves
         if (pruning) {
             //TODO: Implement pruning tree
@@ -53,8 +53,6 @@ class AI {
 //            evalMoveTree(rootNode, evaluateMax: evaluateMax); //bubble up the tree evaluating moves
         }
         
-        
-
         
         for n in rootNode.getChildNodes()! {
             do {

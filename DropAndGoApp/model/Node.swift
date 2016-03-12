@@ -15,11 +15,11 @@ import Foundation
 class Node {
     
     var board: Board
-    var parentNode: Node
+    var parentNode: Node!
     var childNodes: Array<Node>
     var depth: Int
     var action: Int
-    var evalValue: Int?  //this is the value of the board based on the evaluation function set in the AI
+    var evalValue: Int!  //this is the value of the board based on the evaluation function set in the AI
     
     enum Errors: ErrorType {
         case NotSetYet
@@ -33,8 +33,7 @@ class Node {
      * @param action     the action made to get to this board
      * @param depth      number of layers from the root node
      */
-    init(parentNode: Node?, board: Board, action: Int, depth: Int) {
-        self.parentNode = parentNode! //TODO: Remove from init and have set later
+    init(board: Board, action: Int, depth: Int) {
         self.board = board
         self.action = action
         self.depth = depth
@@ -49,11 +48,15 @@ class Node {
     }
     
     func getParent() -> Node {
-        return parentNode;
+        return parentNode!;
     }
     
     func getDepth() -> Int {
         return depth;
+    }
+    
+    func setParent(node: Node) {
+        self.parentNode = node
     }
     
     /**
@@ -132,7 +135,9 @@ class Node {
             
             do {
                 try tmpBoard.makeMove(player, moveColumn: i)  //tries to make move and tests success
-                childNodes.append(Node(parentNode: self, board: tmpBoard, action: i, depth: depth + 1)) //move successful; makes new node
+                let tmpNode: Node = Node(board: tmpBoard, action: i, depth: depth + 1)
+                tmpNode.setParent(self)
+                childNodes.append(tmpNode) //move successful; makes new node
             } catch Board.Errors.OutOfBounds {
                 print("Move is not valid on board")
             } catch {
