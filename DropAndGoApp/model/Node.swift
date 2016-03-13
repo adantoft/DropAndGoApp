@@ -8,10 +8,6 @@
 
 import Foundation
 
-//TODO: Break below code into sections
-//TODO: covert from Java to Swift
-
-
 class Node {
     
     var board: Board
@@ -47,8 +43,12 @@ class Node {
         return action;
     }
     
-    func getParent() -> Node {
-        return parentNode!;
+    func getParent() throws -> Node {
+        if let pNode: Node = parentNode {
+            return pNode;
+        } else {
+            throw Errors.NotSetYet
+        }
     }
     
     func getDepth() -> Int {
@@ -131,26 +131,15 @@ class Node {
         
         for var i = 1; i < board.getBoardLength() + 1; i++ {
             
-            tmpBoard = board //TODO: needs to provide a copy of the board... Clone??
+            tmpBoard = board.copy()
             
-            do {
-                try tmpBoard.makeMove(player, moveColumn: i)  //tries to make move and tests success
+            if try! tmpBoard.makeMove(player, moveColumn: i) {//tries to make move and tests success
                 let tmpNode: Node = Node(board: tmpBoard, action: i, depth: depth + 1)
                 tmpNode.setParent(self)
-                childNodes.append(tmpNode) //move successful; makes new node
-            } catch Board.Errors.OutOfBounds {
-                print("Move is not valid on board")
-            } catch {
-                print("Unknown ERRROR!")
+                childNodes.append(tmpNode) //move successful; add node to list
             }
-            
         }
     }
-    
-    
-    
-    
-    
 }
 
 
