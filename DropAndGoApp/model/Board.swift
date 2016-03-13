@@ -182,7 +182,7 @@ class Board {
      *
      * @return hashcode int
      */
-     func hashCode() -> Int {
+    func hashCode() -> Int {
         for var i = 0; i < board.count; i++ {//needs to be recalculated after every move as the board is mutable
             for var j = 0; j < board[0].count; j++ {
                 hashString = hashString + String(board[i][j]);
@@ -200,6 +200,18 @@ class Board {
     func toString() -> String {
         hashCode();
         return hashString;
+    }
+    
+    /**
+     * Provides copy of the board
+     *
+     * @return board copy
+     */
+    
+    func copy() -> Board {
+        let cloneBoard = Board.init();
+        cloneBoard.setBoard(getStateArrayCopy());
+        return cloneBoard;
     }
     
 }
@@ -252,17 +264,7 @@ return arrCopy;
 
 THE BELOW FUNCTION MIGHT NOT BE NEEDED SINCE ARRAYS ARE VALUE TYPE
 
-/**
-* Provides copy of the board
-*
-* @return board copy
-*/
-@Override
-public Board clone() {
-Board cloneBoard = new Board();
-cloneBoard.setBoard(getStateArrayCopy());
-return cloneBoard;
-}
+
 
 
 
