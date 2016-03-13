@@ -30,7 +30,10 @@ class AI {
         if (plyLevel % 2 == 0) {  //uses ply to determine if the base node will be Max or Min's time to evaluate
             evaluateMax = true; //ply is even
         } else {
-            evaluateMax = false; //ply is odd
+            evaluateMax = false; //ply is odd TODO: FIX THIS
+        }
+        if plyLevel == 1 {
+            evaluateMax = true
         }
     }
     
@@ -48,20 +51,14 @@ class AI {
             //TODO: Implement pruning tree; uncomment the below when ready
             //makePruningMoveTree(rootNode, playerNumber, alphaVal, betaVal, evaluateMax);  //run minmax with pruning
         }else {
-            //            TODO: uncomment below lines once functions are implemented
             makeMoveTree(rootNode, player: playerNumber); //create minmax tree
             evalMoveTree(rootNode, evaluateMax: evaluateMax); //bubble up the tree evaluating moves
         }
         for n in rootNode.getChildNodes()! {
-            do {
-                if (try n.getEvalValue() == rootNode.getEvalValue()) { //grabs nodes that are good moves
-                    goodMoveNodes.append(n);
-                }
-            } catch Node.Errors.NotSetYet {
-                print("Eval not set!!")
-            } catch {
-                print("Unknown ERRROR!")
+            if (try! n.getEvalValue() == rootNode.getEvalValue()) { //grabs nodes that are good moves
+                goodMoveNodes.append(n);
             }
+            
         }
         
         //        BELOW CAN LIKELY BE REMOVED; ONCE TESTING OF ABOVE CODE IS WORKING
@@ -73,10 +70,10 @@ class AI {
         
         var rand: Int
         if (goodMoveNodes.count == 0) { //there are no good moves (game over)
-            rand = Int(arc4random_uniform(UInt32(rootNode.getChildNodes()!.count)))+1
+            rand = Int(arc4random_uniform(UInt32(rootNode.getChildNodes()!.count - 1))) + 1
             return rootNode.getChildNodes()![Int(rand)].getAction() //picks move at random
         } else if (goodMoveNodes.count > 1) {//there is more than 1 good move; pick 1 at random
-            rand = Int(arc4random_uniform(UInt32(goodMoveNodes.count)))+1
+            rand = Int(arc4random_uniform(UInt32(goodMoveNodes.count - 1))) + 1
             return goodMoveNodes[Int(rand)].getAction() //picks move at random
         } else {
             return goodMoveNodes[0].getAction() //there is only 1 good move
@@ -107,7 +104,7 @@ class AI {
         if (node.getDepth() < plyLevel - 1) {
             if (node.hasChildren()) {
                 for n in node.getChildNodes()! {
-                    evalMoveTree(n, evaluateMax: evaluateMax);
+                    evalMoveTree(n, evaluateMax: !evaluateMax);
                 }
             }
             node.setEvalValue(getMinMaxBubbleUp(node, evaluateMax: evaluateMax)); //evaluate moves
@@ -120,30 +117,19 @@ class AI {
         if (node.getChildNodes() == nil) {
             return evaluate(node);
         } else {
-            do {
-                var evalValue = try node.getChildNodes()![0].getEvalValue()
+            var evalValue = try! node.getChildNodes()![0].getEvalValue()
+            
+            for n in node.getChildNodes()! {
                 
-                for n in node.getChildNodes()! {
+                if (evaluateMax) {
+                    evalValue = max(try! n.getEvalValue(), evalValue); //evaluate for Max
                     
-                    if (evaluateMax) {
-                        evalValue = max(try n.getEvalValue(), evalValue); //evaluate for Max
-                        
-                    } else {
-                        evalValue = min(try n.getEvalValue(), evalValue); //evaluate for min
-                    }
+                } else {
+                    evalValue = min(try! n.getEvalValue(), evalValue); //evaluate for min
                 }
-                return evalValue;
-                
-                
-            } catch Node.Errors.NotSetYet {
-                print("Eval not set!!")
-            } catch {
-                print("Unknown ERRROR!")
             }
-            return 0 //TODO: this isn't foolproof... this line of code shouldn't be reached
-
+            return evalValue
         }
-        
     }
     
     
