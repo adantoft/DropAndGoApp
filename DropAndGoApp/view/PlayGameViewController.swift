@@ -18,21 +18,24 @@ class PlayGameViewController: UIViewController {
     var ai: AI?
     var player1 = ""
     var player2 = ""
-    var objects: [UIButton] = []
-    var createBoard = Board.init()
+    var objects: [UILabel] = []
+    var playerOne: [UILabel] = []
+    var playerTwo = []
+    var array = Array(count: 9, repeatedValue: Array(count: 9, repeatedValue: 0))
     
     
 
     @IBAction func switchToMainMenu(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+
+    
     
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         drawBoard()
-        
 
         // Do any additional setup after loading the view.
     }
@@ -64,33 +67,62 @@ class PlayGameViewController: UIViewController {
     }
     
     func drawBoard() {
+        
+        for var i = 0; i < 9; i++ {
+            for var j = 0; j < 9; j++ {
+                array[i][j] = Int(arc4random_uniform(3))
+            }
+        }
+        
         var numCols = 9
         var numRows = 9
         var xOffSet: CGFloat = 26
         var yOffSet: CGFloat = 96
-        var row = 0
-        var col = 0
+        var row = 1
+        var col = 1
         
-        while(col < numCols) {
-        repeat {
-            let button = UIButton()
-                button.backgroundColor = UIColor.blueColor()
-                button.frame = CGRect(x: xOffSet, y: yOffSet, width: 24, height: 24)
-                view.addSubview(button)
-                objects.append(button)
+        while(col-1 < numCols) {
+            repeat {
+                let gameBoard = UILabel()
+                gameBoard.backgroundColor = UIColor.blueColor()
+                gameBoard.frame = CGRect(x: xOffSet, y: yOffSet, width: 24, height: 24)
+                //var i = board!.board[row][col]
+                var i = array[row - 1][col - 1]
+                if i == 0 {
+                    print("print = 0")
+                } else if (i == 1){
+                    gameBoard.textColor = UIColor.whiteColor()
+                    gameBoard.textAlignment = .Center
+                    gameBoard.font = UIFont.systemFontOfSize(20)
+                    gameBoard.text = "X"
+                    print("print = 1")
+                } else if (i == 2){
+                    gameBoard.textColor = UIColor.whiteColor()
+                    gameBoard.textAlignment = .Center
+                    gameBoard.font = UIFont.systemFontOfSize(20)
+                    gameBoard.text = "O"
+                }
+                view.addSubview(gameBoard)
+                //objects.append(gameBoard)
                 xOffSet += 26
                 row++
-        } while row < numRows
-        yOffSet += 26
-        xOffSet = 26
-        row = 0
-        col++
+            } while row-1 < numRows
+            yOffSet += 26
+            xOffSet = 26
+            row = 1
+            col++
         }
         
     }
     
-   
+
     
+ 
+    
+
+
+
+
 
     /*
     // MARK: - Navigation
