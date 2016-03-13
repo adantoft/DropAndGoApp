@@ -38,16 +38,6 @@
                ReferencedContainer = "container:DropAndGoApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8450039E1C7A4DDA0016115F"
-               BuildableName = "DropAndGoAppUITests.xctest"
-               BlueprintName = "DropAndGoAppUITests"
-               ReferencedContainer = "container:DropAndGoApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
