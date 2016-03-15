@@ -8,10 +8,6 @@
 
 import Foundation
 
-//TODO: Break below code into sections
-//TODO: covert from Java to Swift
-
-
 class AI {
     
     var board: Board

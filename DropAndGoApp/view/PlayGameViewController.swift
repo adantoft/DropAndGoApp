@@ -22,8 +22,8 @@ class PlayGameViewController: UIViewController {
     var moveCount: Int = 0; //keeps track of moves
     var moveLimit: Int = 0 //once this is reached gamestate is set to false
     var gameState: Bool = true; //game will loop turns until false
-    var player1 = ""
-    var player2 = ""
+    var p1Name = ""
+    var p2Name = ""
     var objects: [UILabel] = []
     
     var array = Array(count: 9, repeatedValue: Array(count: 9, repeatedValue: 0))
@@ -40,7 +40,8 @@ class PlayGameViewController: UIViewController {
         } else {
             moveLimit = board.getBoardLength() * board.getBoardLength() - 1; //odd
         }
-        
+        player1Display.text = p1Name + ": 0"
+        player2Display.text = p2Name + ": 0"        
         
         drawInitialBoard()
         ai = AI.init(board: board, playerNumber: p2, opponentPlayerNumber: p1, plyLevel: aiDifficulty, pruning: false)
@@ -48,28 +49,31 @@ class PlayGameViewController: UIViewController {
     
     func handleSingleTap(sender: UITapGestureRecognizer) {
         let tappedGraphic = sender.view!
-//        tappedGraphic.backgroundColor = UIColor.grayColor()
-//        print(String(tappedGraphic.tag/10 - 1) + String(tappedGraphic.tag%10 - 1))
+        //        tappedGraphic.backgroundColor = UIColor.grayColor()
+        //        print(String(tappedGraphic.tag/10 - 1) + String(tappedGraphic.tag%10 - 1))
         
         //Make player move
         try! board.makeMove(p1, moveColumn: tappedGraphic.tag/10)
         reDrawBoard()
-        player1Display.text = String(board.getPlayerScore(p1))
+        player1Display.text = p1Name + ": " + String(board.getPlayerScore(p1))
         moveCount++
-        
-        //AI Makes a move
-        try! board.makeMove(p2, moveColumn: ai.getMove())
-        reDrawBoard()
-        player2Display.text = String(board.getPlayerScore(p2))
-        moveCount++
-        
         if (!board.hasAvailableMoves() || moveCount == moveLimit) { //checks if there are available moves or if move limit is reached
             gameState = false;     // also will leave 1 spot open in odd by odd board length games to not give first player an extra move
+        } else {
             
-            //TODO: CODE HERE ONCE GAME IS OVER!
+            //AI Makes a move
+            try! board.makeMove(p2, moveColumn: ai.getMove())
+            reDrawBoard()
+            player2Display.text = p2Name + ": " + String(board.getPlayerScore(p2))
+            moveCount++
+            if (!board.hasAvailableMoves() || moveCount == moveLimit) { //checks if there are available moves or if move limit is reached
+                gameState = false;     // also will leave 1 spot open in odd by odd board length games to not give first player an extra move
+            }
         }
         
-        
+        if (!gameState) { //checks if game is over
+            //TODO: CODE HERE ONCE GAME IS OVER!
+        }
         
         //        for var x = 0; x < 81; x++ {
         //            tappedGraphic.backgroundColor = UIColor.grayColor()
@@ -91,8 +95,7 @@ class PlayGameViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        player1Display.text = player1 + ": 0"
-        player2Display.text = player2 + ": 0"
+
     }
     
     
@@ -126,7 +129,7 @@ class PlayGameViewController: UIViewController {
                 gameBoard.textAlignment = .Center
                 gameBoard.font = UIFont.systemFontOfSize(20)
                 view.addSubview(gameBoard)
-                objects.append(gameBoard)  //TODO: Probably dont need
+                objects.append(gameBoard)
                 gameBoard.userInteractionEnabled = true
                 let singleTapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
                 gameBoard.addGestureRecognizer(singleTapRecognizer)

@@ -42,11 +42,11 @@ class MenuViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         
         if let target = segue.destinationViewController as? PlayGameViewController{
             if let player1 = playerNameField.text {
-                target.player1 = "\(player1)"
+                target.p1Name = "\(player1)"
                 if (options[picker.selectedRowInComponent(1)] == "Computer") {
-                    target.player2 = "Computer"
+                    target.p2Name = "Computer"
                 } else {
-                    target.player2 = "Online Player"
+                    target.p2Name = "Online Player"
                     message = "Feature to be coming in the Future\n Select Again."
                     let title = "Feature Not Available"
                     
