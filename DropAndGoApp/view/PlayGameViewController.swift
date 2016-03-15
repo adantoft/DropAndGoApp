@@ -10,7 +10,6 @@ import UIKit
 
 class PlayGameViewController: UIViewController {
     
-    @IBOutlet weak var singleTapLabel: UILabel!
     @IBOutlet weak var player1Display: UILabel!
     @IBOutlet weak var player2Display: UILabel!
     
@@ -40,6 +39,9 @@ class PlayGameViewController: UIViewController {
         } else {
             moveLimit = board.getBoardLength() * board.getBoardLength() - 1; //odd
         }
+        if p1Name == "" {
+            p1Name = "Player"
+        }
         player1Display.text = p1Name + ": 0"
         player2Display.text = p2Name + ": 0"        
         
@@ -49,10 +51,6 @@ class PlayGameViewController: UIViewController {
     
     func handleSingleTap(sender: UITapGestureRecognizer) {
         let tappedGraphic = sender.view!
-        //        tappedGraphic.backgroundColor = UIColor.grayColor()
-        //        print(String(tappedGraphic.tag/10 - 1) + String(tappedGraphic.tag%10 - 1))
-        
-        //Make player move
         try! board.makeMove(p1, moveColumn: tappedGraphic.tag/10)
         reDrawBoard()
         player1Display.text = p1Name + ": " + String(board.getPlayerScore(p1))
@@ -72,20 +70,24 @@ class PlayGameViewController: UIViewController {
         }
         
         if (!gameState) { //checks if game is over
-            //TODO: CODE HERE ONCE GAME IS OVER!
+            var message = ""
+            var p1 = player1Display.text
+            var p2 = player2Display.text
+            var p1Score = p1?.componentsSeparatedByString(": ")
+            var p2Score = p2?.componentsSeparatedByString(": ")
+            var one = p1Score![1]
+            var two = p2Score![1]
+            if one < two {
+                message = " \(p2Score![0]) is the WINNER!\n \(p1Score![0])=\(p1Score![1])\n \(p2Score![0])=\(p2Score![1]) "
+                gameOverAlert(message)
+            } else {
+                message = " \(p1Score![0]) is the WINNER!\n \(p1Score![0])=\(p1Score![1])\n \(p2Score![0])=\(p2Score![1]) "
+                gameOverAlert(message)
+            }
+        
+            
         }
         
-        //        for var x = 0; x < 81; x++ {
-        //            tappedGraphic.backgroundColor = UIColor.grayColor()
-        //        }
-        //        let n = sender.numberOfTouches()
-        //        var message = ""
-        //        for i in 0 ..< n {
-        //            message += " \(sender.locationOfTouch(i, inView: view))"
-        //        }
-        //        singleTapLabel.text = "Single tap at:" + message + "\nNumber of touches: \(n)"
-        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * NSEC_PER_SEC)),
-        //            dispatch_get_main_queue()) { self.singleTapLabel.text = "No single tap detected" }
     }
     
     
@@ -98,27 +100,62 @@ class PlayGameViewController: UIViewController {
 
     }
     
+    func gameOverAlert(message: String){
+        let title = "Game Over!"
+        
+        // Create the action.
+        let okAction = UIAlertAction(title: "Okay",
+            style: .Default,
+            handler: {(_) in self.performSegueWithIdentifier("unwindToMenu", sender: self)})
+        
+        let alertController =
+        UIAlertController(title: title,
+            message: message,
+            preferredStyle: .Alert)
+        alertController.addAction(okAction)
+        presentViewController(alertController,
+            animated: true,
+            completion: nil)
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let target = segue.destinationViewController as? TutorialViewController{
             target.from = "PlayGameViewController"
-            /*
-            target.message = "From YellowViewController"
-            if let text = textField.text {
-            target.message += "\nMessage: \(text)"
-            }
-            */
         }
     }
     
+    
     func drawInitialBoard() {
+        
+        let deviceType = UIDevice.currentDevice().modelName
+        var m: UIDevice!
+        
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        
+        if deviceType.lowercaseString.rangeOfString("iphone 4") != nil {
+            print("iPhone 4 or iphone 4s")
+            x = 46
+            y = 126
+        }
+        else if deviceType.lowercaseString.rangeOfString("iphone 5") != nil {
+            print("iPhone 5 or iphone 5s")
+            x = 46
+            y = 146
+        }
+        else if deviceType.lowercaseString.rangeOfString("iphone 6") != nil {
+            print("iPhone 6 Series")
+            x = 76
+            y = 166
+        }
         
         let numCols = board.getBoardLength()
         let numRows = board.getBoardLength()
-        var xOffSet: CGFloat = 26
-        var yOffSet: CGFloat = 96
+        var xOffSet: CGFloat = x
+        var yOffSet: CGFloat = y
         
         for var i = 0; i < numRows; i++ {
             for var j = 0; j < numCols; j++ {
@@ -136,7 +173,7 @@ class PlayGameViewController: UIViewController {
                 gameBoard.tag = Int(String(i + 1) + String(numCols - j))! //concat j (col) and i (row) to form tag of (col row)
                 yOffSet += 26
             }
-            yOffSet = 96
+            yOffSet = y
             xOffSet += 26
         }
         view.setNeedsDisplay()
