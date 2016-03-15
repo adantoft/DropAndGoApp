@@ -316,7 +316,7 @@ class DropAndGoAppTests: XCTestCase {
         print("--- Welcome to Simacogo! ---")
         
         let ai = AI.init(board: board, playerNumber: 2, opponentPlayerNumber: 1, plyLevel: aiDifficulty, pruning: pruning)
-        let ai2 = AI.init(board: board, playerNumber: 1, opponentPlayerNumber: 2, plyLevel: 1, pruning: pruning)
+//        let ai2 = AI.init(board: board, playerNumber: 1, opponentPlayerNumber: 2, plyLevel: 1, pruning: pruning)
         PrintBoard(board)
         
         print("Ready??");
