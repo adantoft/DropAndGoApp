@@ -25,9 +25,6 @@ class PlayGameViewController: UIViewController {
     var p2Name = ""
     var objects: [UILabel] = []
     
-    var array = Array(count: 9, repeatedValue: Array(count: 9, repeatedValue: 0))
-    
-    
     @IBAction func switchToMainMenu(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -43,7 +40,7 @@ class PlayGameViewController: UIViewController {
             p1Name = "Player"
         }
         player1Display.text = p1Name + ": 0"
-        player2Display.text = p2Name + ": 0"        
+        player2Display.text = p2Name + ": 0"
         
         drawInitialBoard()
         ai = AI.init(board: board, playerNumber: p2, opponentPlayerNumber: p1, plyLevel: aiDifficulty, pruning: false)
@@ -51,40 +48,44 @@ class PlayGameViewController: UIViewController {
     
     func handleSingleTap(sender: UITapGestureRecognizer) {
         let tappedGraphic = sender.view!
-        try! board.makeMove(p1, moveColumn: tappedGraphic.tag/10)
-        reDrawBoard()
-        player1Display.text = p1Name + ": " + String(board.getPlayerScore(p1))
-        moveCount++
-        if (!board.hasAvailableMoves() || moveCount == moveLimit) { //checks if there are available moves or if move limit is reached
-            gameState = false;     // also will leave 1 spot open in odd by odd board length games to not give first player an extra move
+        
+        //get player move
+        if (try! !board.makeMove(p1, moveColumn: tappedGraphic.tag/10)) {
+            //illegal move (column likely full
+            // for now, do nothing, but should perhaps include a popup
         } else {
-            
-            //AI Makes a move
-            try! board.makeMove(p2, moveColumn: ai.getMove())
             reDrawBoard()
-            player2Display.text = p2Name + ": " + String(board.getPlayerScore(p2))
+            player1Display.text = p1Name + ": " + String(board.getPlayerScore(p1))
             moveCount++
             if (!board.hasAvailableMoves() || moveCount == moveLimit) { //checks if there are available moves or if move limit is reached
                 gameState = false;     // also will leave 1 spot open in odd by odd board length games to not give first player an extra move
+            } else {
+                
+                //AI Makes a move
+                try! board.makeMove(p2, moveColumn: ai.getMove())
+                reDrawBoard()
+                player2Display.text = p2Name + ": " + String(board.getPlayerScore(p2))
+                moveCount++
+                if (!board.hasAvailableMoves() || moveCount == moveLimit) { //checks if there are available moves or if move limit is reached
+                    gameState = false;     // also will leave 1 spot open in odd by odd board length games to not give first player an extra move
+                }
             }
         }
         
         if (!gameState) { //checks if game is over
             var message = ""
-            var p1 = player1Display.text
-            var p2 = player2Display.text
-            var p1Score = p1?.componentsSeparatedByString(": ")
-            var p2Score = p2?.componentsSeparatedByString(": ")
-            var one = p1Score![1]
-            var two = p2Score![1]
+            var p1Score = player1Display.text!.componentsSeparatedByString(": ")
+            var p2Score = player2Display.text!.componentsSeparatedByString(": ")
+            let one = p1Score[1]
+            let two = p2Score[1]
             if one < two {
-                message = " \(p2Score![0]) is the WINNER!\n \(p1Score![0])=\(p1Score![1])\n \(p2Score![0])=\(p2Score![1]) "
+                message = " \(p2Score[0]) is the WINNER!\n \(p1Score[0])=\(p1Score[1])\n \(p2Score[0])=\(p2Score[1]) "
                 gameOverAlert(message)
             } else {
-                message = " \(p1Score![0]) is the WINNER!\n \(p1Score![0])=\(p1Score![1])\n \(p2Score![0])=\(p2Score![1]) "
+                message = " \(p1Score[0]) is the WINNER!\n \(p1Score[0])=\(p1Score[1])\n \(p2Score[0])=\(p2Score[1]) "
                 gameOverAlert(message)
             }
-        
+            
             
         }
         
@@ -97,7 +98,7 @@ class PlayGameViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-
+        
     }
     
     func gameOverAlert(message: String){
@@ -118,7 +119,6 @@ class PlayGameViewController: UIViewController {
             completion: nil)
     }
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -131,7 +131,7 @@ class PlayGameViewController: UIViewController {
     func drawInitialBoard() {
         
         let deviceType = UIDevice.currentDevice().modelName
-        var m: UIDevice!
+        //        let m: UIDevice!
         
         var x: CGFloat = 0
         var y: CGFloat = 0
