@@ -202,25 +202,45 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Drop And Go Tutorial" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2b-6v-mUT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drop And Go Tutorial" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2b-6v-mUT">
                                 <rect key="frame" x="190" y="41" width="220" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="pj3-8k-lrS"/>
+                                    <constraint firstAttribute="width" constant="220" id="rNC-L0-6rO"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="28" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJt-Nx-W4c">
+                                <rect key="frame" x="43" y="70" width="514" height="420"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="420" id="47h-LM-b8s"/>
+                                    <constraint firstAttribute="width" constant="381" id="5Gl-Kv-4Wx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VRU-dM-WSc" firstAttribute="top" secondItem="TZR-iq-iU1" secondAttribute="bottom" constant="12" id="Ddg-j1-43j"/>
+                            <constraint firstItem="JJt-Nx-W4c" firstAttribute="leading" secondItem="RlX-UG-eIZ" secondAttribute="leadingMargin" constant="23" id="Eu6-9D-x6n"/>
+                            <constraint firstItem="JJt-Nx-W4c" firstAttribute="top" secondItem="V2b-6v-mUT" secondAttribute="bottom" constant="8" symbolic="YES" id="GPb-db-Pe8"/>
                             <constraint firstAttribute="trailing" secondItem="VRU-dM-WSc" secondAttribute="trailing" id="Wst-5u-t3G"/>
+                            <constraint firstItem="V2b-6v-mUT" firstAttribute="top" secondItem="c2j-kY-noC" secondAttribute="bottom" constant="21" id="fos-gf-qjj"/>
+                            <constraint firstItem="V2b-6v-mUT" firstAttribute="centerX" secondItem="RlX-UG-eIZ" secondAttribute="centerX" id="iLf-ml-zEg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JJt-Nx-W4c" secondAttribute="trailing" constant="23" id="k2l-vS-mF4"/>
                             <constraint firstAttribute="bottomMargin" secondItem="VRU-dM-WSc" secondAttribute="bottom" constant="-7" id="k5j-yw-5kc"/>
-                            <constraint firstItem="VRU-dM-WSc" firstAttribute="leading" secondItem="RlX-UG-eIZ" secondAttribute="leading" id="yQf-69-p8R"/>
+                            <constraint firstItem="TZR-iq-iU1" firstAttribute="top" secondItem="JJt-Nx-W4c" secondAttribute="bottom" constant="20" id="mPy-bT-EET"/>
+                            <constraint firstItem="V2b-6v-mUT" firstAttribute="centerX" secondItem="VRU-dM-WSc" secondAttribute="centerX" id="o3i-5V-GjS"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="fromDisplay" destination="TZR-iq-iU1" id="I7g-eH-2xB"/>
                         <outlet property="gameButton" destination="dpZ-kT-uKe" id="fUp-3a-Ede"/>
                         <outlet property="menuButton" destination="YSl-SX-iN8" id="GB2-hv-gdr"/>
+                        <outlet property="tutorilaDisplay" destination="JJt-Nx-W4c" id="jBH-4E-vz8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QxC-Bn-zMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
